@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" href="https://use.fontawesome.com/facf9fa52c.js"/>
+      <title>Title of the document</title>
+      <style>
+         /*
+         CSS for the main interaction
+         */
+            @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Open Sans'), local('OpenSans'), url(http://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2) format('woff2');
+            }
+            @font-face {
+            font-family: 'Open Sans';
+            font-style: normal;
+            font-weight: 600;
+            src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(http://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNShampu5_7CjHW5spxoeN3Vs.woff2) format('woff2');
+            }
+            @font-face {
+            font-family: 'Open Sans';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Open Sans Italic'), local('OpenSans-Italic'), url(http://fonts.gstatic.com/s/opensans/v13/xjAJXh38I15wypJXxuGMBogp9Q8gbYrhqGlRav_IXfk.woff2) format('woff2');
+            }
+            @font-face {
+            font-family: 'Open Sans';
+            font-style: italic;
+            font-weight: 600;
+            src: local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'), url(http://fonts.gstatic.com/s/opensans/v13/PRmiXeptR36kaC0GEAetxsiAiQ_a33snTsJhwZvMEaI.woff2) format('woff2');
+            }
+
+
+         .source {
+        border-top: 2px solid black;
+        }
+        .accordion.not{
+         border-top: 2px solid black;
+        }
+         .container{
+         width:944px;
+         height:fit-content;
+         position: relative;
+         }
+         .bar {
+         height: 34px;
+         position: absolute;
+         margin-top:-5px;
+         left:400px;
+         }
+         .number{
+         position: absolute;
+         width:52px;
+         text-align: right;
+         left:340px;
+         height: 32px;
+         vertical-align: middle;
+         padding:0;
+         }
+         label{
+         width:944px;
+         }
+         .level0{
+         background-color:#206095;
+         color:white;
+         text-align: right;
+         padding-right: 5px;
+         padding-top: 5px;
+         font-weight: bold;
+         display: inline-block;
+         }
+         .level1{
+         background-color: #27a0cc;
+         }
+         .level2{
+         background-color:#003c57;
+         height:15px;
+         border-radius:3px;
+         margin-top:0;
+         }
+         .accordion > input[type="checkbox"] {
+         position: absolute;
+         left: -100vw;
+         }
+         .accordion .content {
+         visibility:hidden;
+         overflow-y: hidden;
+         height: 0;
+         transition: height 0.8s ease;
+         }
+         .accordion > input[type="checkbox"]:checked ~ .content {
+         visibility:visible;
+         height: auto;
+         overflow: visible;
+         }
+         .accordion > input[type="checkbox"]:checked ~ h2 span{
+         opacity:1;
+         /*height: auto;*/
+         /*overflow: hidden;*/
+         }
+         .accordion label {
+         display: block;
+         }
+         /*
+         Styling
+         */
+         body {
+         font: 16px/1.5em "Open Sans",  sans-serif;
+         color: #333;
+         font-weight: 300;
+         width:auto;
+         margin:none;
+         margin-left:0px;
+         padding:none;
+         }
+         .grid{
+         position:absolute;
+         left:450px;
+         width:544px;
+         height:93px;
+         /*background-size: 54px;*/
+         /*background-image: linear-gradient(to right, lightgrey 1px, transparent 0px)*/
+         }
+         .accordion {
+         /*border-bottom: 1px solid black;*/
+         border-top: 1px solid black;
+         width:944px;
+         }
+         .accordion > input[type="checkbox"]:checked ~ .content {
+         padding-left: 15px;
+         border-top: 0;
+         }
+         .accordion .handle {
+         margin: 0;
+         font-size: 16px;
+         /* line-height: 1.2em;*/
+         width:944px;
+         }
+         .handle1{
+         width:944px;
+         }
+         .accordion .handle2 {
+         line-height: 14px;
+         margin: 0;
+         font-size: 16px;
+         width:928px;
+         padding-left:20px;
+         border-top: #999 solid 0.5px;
+         }
+         .handle label {
+         font-weight: bold;
+         }
+         .handle2 label {
+         font-weight: normal;
+         }
+         .accordion label {
+         color: #333;
+         cursor: pointer;
+         padding: 6px;
+         }
+         .accordion label:hover,
+         .accordion label:focus {
+         background: #d8d8d8;
+         }
+         .accordion:not(.not) .handle label:before {
+
+            position: relative;
+            /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+            content: "";
+            display: inline-block;
+            /* By using an em scale, the arrows will size with the font */
+            width: 0.6em;
+            height: 0.6em;
+            border-right: 0.2em solid black;
+            border-top: 0.2em solid black;
+            transform: rotate(45deg);
+            margin-right: 0.5em;
+
+         }
+         .accordion:not(.not) > input[type="checkbox"]:checked ~ .handle label:before {
+
+            position: relative;
+            content: "";
+            display: inline-block;
+            width: 0.6em;
+            height: 0.6em;
+            border-right: 0.2em solid black;
+            border-top: 0.2em solid black;
+            transform: rotate(135deg);
+            margin-right: 0.5em;
+
+         }
+        .not > label:before {
+         content: "\a0\a0\a0" !important;
+         display: inline-block;
+         margin-right: 10px;
+         font-size: .58em;
+         line-height: 1.556em;
+         vertical-align: middle;
+         }
+         /*
+         Demo purposes only
+         */
+         *,
+         *:before,
+         *:after {
+         box-sizing: border-box;
+         }
+         body {
+         font-family:'Open Sans'
+         }
+         a {
+         color: white;
+         }
+         p {
+         margin: 0 0 1em;
+         }
+         h1 {
+         margin: 0 0 1.5em;
+         font-weight: 600;
+         font-size: 1.5em;
+         }
+         .accordion {
+         max-width: 65em;
+         }
+         .accordion p:last-child {
+         margin-bottom: 0;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container" style="margin:0 auto;">
+      <h1>Household family composition, Manchester, 2021</h1>
+      <!--<div class="grid"></div>-->
+
+      <section class="accordion not">
+         <input type="checkbox" name="collapse2" id="handle0">
+         <h2 class="handle">
+            <label for="handle0">All households<span class="number">100%</span><span class="level0 bar" style='width:calc( 100 /100 * 544px )'><b>1,073,971 households</b></span></label>
+         </h2>
+         <div class="content">
+         </div>
+      </section>
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle1">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle1">One person household<span class="number" >32.5%</span><span class="level1 bar" style='width:calc( 32.5 /100 *544px )'></span></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">Aged 66 years or over<span class="number">12.0%</span><span class="level2 bar" style='width:calc( 12.0 /100 *544px );'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Other<span class="number" style="margin-left:calc( 12.0 /100 *544px )">20.5%</span><span class="level2 bar" style='width: calc( 20.5/100 *544px );margin-left:calc(12.0 /100 * 544px )'></span></label>
+            </h2>
+         </div>
+      </section>
+
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle2">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle2">Single family household<span class="number" style="margin-left:calc( 32.5 /100 *544px )">6.5%</span><span class="level1 bar" style='width:calc( 6.5 /100 *544px ); margin-left:calc( 32.5 /100 *544px )'></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">Aged 66 years or over<span class="number" style="margin-left:calc( 32.5 /100 *544px )">3.2%</span><span class="level2 bar" style='width:calc( 3.2 /100 *544px ); margin-left: calc( 32.5 /100 *544px )'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Other<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 3.2 /100 *544px ) )">3.3%</span><span class="level2 bar" style='width: calc( 3.3/100 *544px );margin-left:calc( 32.5 /100 *544px + ( 3.2 /100 *544px))'></span></label>
+            </h2>
+         </div>
+      </section>
+
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle3">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle3">Married or civil partnership couple<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) )">30.0%</span><span class="level1 bar" style='width:calc( 30.0/100 *544px ); margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ))'></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">No children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) )"">10.4%</span><span class="level2 bar" style='width:calc( 10.4 /100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 10.4 /100 *544px ))">14.2%</span><span class="level2 bar" style='width: calc( 14.2/100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 10.4 /100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">All non-dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 10.4 /100 *544px ) + ( 14.2 /100 *544px ))">5.4%</span><span class="level2 bar" style='width: calc( 5.4/100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 10.4 /100 *544px ) + ( 14.2/100 *544px ))'></span></label>
+            </h2>
+         </div>
+      </section>
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle4">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle4">Cohabiting couple family<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ))">10.5%</span><span class="level1 bar" style='width:calc( 10.5 /100 *544px ); margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ))'></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">No children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ))">5.4%</span><span class="level2 bar" style='width:calc( 5.4 /100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 5.4 /100 *544px ))">4.5%</span><span class="level2 bar" style='width: calc( 4.5/100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 5.4 /100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">All non-dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 5.4 /100 *544px ) + ( 4.5/100 *544px ))">0.6%</span><span class="level2 bar" style='width: calc( 0.6/100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 5.4 /100 *544px ) + ( 4.5/100 *544px ))'></span></label>
+            </h2>
+         </div>
+      </section>
+
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle5">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle5">Lone parent family<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ))">12.6%</span><span class="level1 bar" style='width:calc( 12.6 /100 *544px ); margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ))'></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">With dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ))">2.8%</span><span class="level2 bar" style='width:calc( 2.8 /100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">All non-dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ) + ( 2.8 /100 *544px ))">3.9%</span><span class="level2 bar" style='width: calc( 3.9/100 *544px );margin-left:calc(12.0 /100 * 544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ) + ( 2.8 /100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Other single family households<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ) + ( 2.8 /100 *544px ) + ( 3.9/100 *544px ))">5.9%</span><span class="level2 bar" style='width: calc( 5.9/100 *544px );margin-left:calc(12.0 /100 * 544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ) + ( 2.8 /100 *544px ) + ( 3.9/100 *544px ))'></span></label>
+            </h2>
+         </div>
+      </section>
+
+      <section class="accordion">
+         <input type="checkbox" name="collapse" id="handle6">
+         <h2 class="handle" id="handle1_h2" >
+            <label for="handle6">Multiple family household<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ))">7.9%</span><span class="level1 bar" style='width:calc( 7.9 /100 *544px ); margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ))'></span></label>
+         </h2>
+         <div class="content">
+            <div class="grid"></div>
+            <h2 class="handle2">
+               <label for="handle2">With dependent children<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ))">2.8%</span><span class="level2 bar" style='width:calc( 2.8 /100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ))'></span></label>
+            </h2>
+            <h2 class="handle2">
+               <label for="handle2">Other (including all full-time students and those aged 66 years and over)<span class="number" style="margin-left:calc( 32.5 /100 *544px + ( 6.5 /100 *544px ) + ( 30.0 /100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ) + ( 2.8 /100 *544px ))">5.1%</span><span class="level2 bar" style='width: calc( 5.1/100 *544px );margin-left:calc(32.5 /100 *544px + ( 6.5/100 *544px ) + ( 30.0/100 *544px ) + ( 10.5 /100 *544px ) + ( 12.6 /100 *544px ) + ( 2.8 /100 *544px ))'></span></label>
+            </h2>
+         </div>
+      </section>
+      
+      <p class="source"><small>Source: England and Wales Census, 2021</small></p>
+      </container>
+   </body>
+</html>
